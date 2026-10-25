@@ -259,7 +259,7 @@ function App() {
 
       <footer>
         <span>© {new Date().getFullYear()} Karthik B</span>
-        <span>Made with intent, not templates.</span>
+        <span>Designed and built from scratch, not templates.</span>
         <span>Chennai, IN</span>
       </footer>
 
