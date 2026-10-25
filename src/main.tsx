@@ -3,7 +3,6 @@ import { createRoot } from 'react-dom/client'
 import { AnimatePresence, motion, useMotionValue, useSpring } from 'framer-motion'
 import { ArrowDownRight, ArrowUpRight, Command, Moon, Play, Sun, X } from 'lucide-react'
 import gsap from 'gsap'
-import Lenis from '@studio-freight/lenis'
 import './styles.css'
 
 type Project = {
@@ -38,23 +37,12 @@ function App() {
     }
     window.addEventListener('pointermove', onMove)
 
-    const lenis = new Lenis({ duration: 1.05, smoothWheel: true })
-    let frame = 0
-    const raf = (time: number) => {
-      lenis.raf(time)
-      frame = requestAnimationFrame(raf)
-    }
-    frame = requestAnimationFrame(raf)
-
     const ctx = gsap.context(() => {
-      gsap.fromTo('.hero-reveal', { y: 72, opacity: 0, rotate: 1 }, { y: 0, opacity: 1, rotate: 0, duration: 1.1, ease: 'power4.out', stagger: 0.12 })
       gsap.fromTo('.project-card', { y: 36, opacity: 0 }, { y: 0, opacity: 1, duration: 0.7, ease: 'power3.out', stagger: 0.1, delay: 0.7 })
     }, root)
 
     return () => {
       window.removeEventListener('pointermove', onMove)
-      cancelAnimationFrame(frame)
-      lenis.destroy()
       ctx.revert()
     }
   }, [cursorX, cursorY])
